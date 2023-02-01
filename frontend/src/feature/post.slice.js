@@ -24,6 +24,7 @@ export const postSlice = createSlice({
             ...post,
             message: payload[0],
           };
+          // ne pas oublier de retourner post dans else{}
         } else return post;
       });
     },
