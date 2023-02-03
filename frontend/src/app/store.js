@@ -7,4 +7,6 @@ export default configureStore({
     user: userReducer,
     posts: postReducer,
   },
+  // passer devTools: false avant la compilation du projet pour cacher le store dans le navigateur
+  // devTools: false,
 });

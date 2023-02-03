@@ -23,7 +23,7 @@ const Post = ({ post }) => {
       axios.put("http://localhost:5000/post/" + post._id, {
         message: newMessage,
       });
-      dispatch(editPost([newMessage, post._id]));
+      dispatch(editPost([post._id, newMessage]));
     }
   };
 

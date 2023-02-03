@@ -14,6 +14,8 @@ const NewPost = () => {
     const data = {
       message,
       author: userId,
+      // pour eviter l'erreur key prop dans la conslole lors de creation de nouveau post on peut ajout un _id temporaire
+      // _id: Date.now(),
     };
     axios.post("http://localhost:5000/post/", data).then(() => {
       dispatch(createPost(data));

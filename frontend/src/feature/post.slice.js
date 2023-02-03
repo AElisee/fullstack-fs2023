@@ -19,17 +19,28 @@ export const postSlice = createSlice({
     },
     editPost: (state, { payload }) => {
       state.postsData = state.postsData.map((post) => {
-        if (post._id === payload[1]) {
+        if (post._id === payload[0]) {
           return {
             ...post,
-            message: payload[0],
+            message: payload[1],
           };
           // ne pas oublier de retourner post dans else{}
+        } else return post;
+      });
+    },
+    deletePost: (state, { payload }) => {
+      state.postsData = state.postsData.filter((post) => post._id !== payload);
+    },
+    like: (state, { payload }) => {
+      state.postsData = postsData.map((post) => {
+        if (post_id == payload[0]) {
+          return { ...post, likers: [post.likers, payload[1]] };
         } else return post;
       });
     },
   },
 });
 
-export const { getPostsSucces, createPost, editPost } = postSlice.actions;
+export const { getPostsSucces, createPost, editPost, deletePost, like } =
+  postSlice.actions;
 export default postSlice.reducer;
