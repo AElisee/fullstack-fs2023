@@ -32,15 +32,31 @@ export const postSlice = createSlice({
       state.postsData = state.postsData.filter((post) => post._id !== payload);
     },
     like: (state, { payload }) => {
-      state.postsData = postsData.map((post) => {
-        if (post_id == payload[0]) {
-          return { ...post, likers: [post.likers, payload[1]] };
+      state.postsData = state.postsData.map((post) => {
+        if (post._id == payload[1]) {
+          return { ...post, likers: [...post.likers, payload[0]] };
+        } else return post;
+      });
+    },
+    dislike: (state, { payload }) => {
+      state.postsData = state.postsData.map((post) => {
+        if (post._id == payload[1]) {
+          return {
+            ...post,
+            likers: post.likers.filter((userId) => userId !== payload[0]),
+          };
         } else return post;
       });
     },
   },
 });
 
-export const { getPostsSucces, createPost, editPost, deletePost, like } =
-  postSlice.actions;
+export const {
+  getPostsSucces,
+  createPost,
+  editPost,
+  deletePost,
+  like,
+  dislike,
+} = postSlice.actions;
 export default postSlice.reducer;

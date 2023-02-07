@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { like } from "../feature/post.slice";
+import { dislike, like } from "../feature/post.slice";
 
 const LikePost = ({ post }) => {
   const [userLiked, setUserLiked] = useState(false);
@@ -20,13 +20,15 @@ const LikePost = ({ post }) => {
     axios.patch("http://localhost:5000/post/like-post/" + post._id, {
       userId,
     });
-    dislikePost(like([post._id, userId]));
+    dispatch(like([userId, post._id]));
     setUserLiked(true);
   };
+
   const dislikePost = () => {
-    axios.patch("http://localhost:5000/post/like-post/" + post._id, {
+    axios.patch("http://localhost:5000/post/dislike-post/" + post._id, {
       userId,
     });
+    dispatch(dislike([userId, post._id]));
     setUserLiked(false);
   };
 
